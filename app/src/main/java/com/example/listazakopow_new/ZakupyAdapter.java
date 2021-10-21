@@ -1,6 +1,7 @@
 package com.example.listazakopow_new;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class ZakupyAdapter extends RecyclerView.Adapter<ZakupyAdapter.ProduktViewHolder> {
-    private ArrayList<String> produkty;
+    private ArrayList<Produkt> produkty;
     private LayoutInflater inflater;
 
-    public ZakupyAdapter(Context context, ArrayList<String> produkty) {
+    public ZakupyAdapter(Context context,
+                         ArrayList<Produkt> produkty) {
         this.produkty = produkty;
         inflater = LayoutInflater.from(context); // przypisuje widokom ,xml
     }
@@ -32,11 +34,32 @@ public class ZakupyAdapter extends RecyclerView.Adapter<ZakupyAdapter.ProduktVie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProduktViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ProduktViewHolder holder, final int position) {
         // do widoków przypisujemy dane do wyświetlenia
         // na bieżąco
 
-        holder.itemTextView.setText(produkty.get(position));
+        holder.itemTextView.setText(produkty.get(position).getNazwa());
+        holder.itemTextView.setOnClickListener(
+                new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!produkty.get(position).isZaznaczony()){
+                    holder.itemTextView.setPaintFlags(
+                        holder.itemTextView.getPaintFlags()
+                        | Paint.STRIKE_THRU_TEXT_FLAG
+                    );
+                    produkty.get(position).setZaznaczony(true);
+                }
+                else{
+                    holder.itemTextView.setPaintFlags(
+                            holder.itemTextView.getPaintFlags()
+                                    & ~Paint.STRIKE_THRU_TEXT_FLAG
+                    );
+                    produkty.get(position).setZaznaczony(false);
+                }
+
+            }
+        });
     }
 
     @Override

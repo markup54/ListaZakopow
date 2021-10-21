@@ -19,5 +19,6 @@ public class MainActivity extends AppCompatActivity {
         zakupyAdapter = new ZakupyAdapter(this, listaZakopow.produkty);
         recyclerView.setAdapter(zakupyAdapter); // łączymy z adapterem
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
 }
