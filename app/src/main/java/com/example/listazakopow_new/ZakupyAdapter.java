@@ -11,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class ZakupyAdapter extends RecyclerView.Adapter<ZakupyAdapter.ProduktViewHolder> { // kliknij żarówkę: create class ProduktViewHolder / żarówka nr3. implement methods
-    // będzie rozrzeszało recyclerView adapter
+public class ZakupyAdapter extends RecyclerView.Adapter<ZakupyAdapter.ProduktViewHolder> {
     private ArrayList<String> produkty;
-    private LayoutInflater inflater; // ?
+    private LayoutInflater inflater;
 
-    public ZakupyAdapter(Context context, ArrayList<String> produkty) { // czemu context ?
+    public ZakupyAdapter(Context context, ArrayList<String> produkty) {
         this.produkty = produkty;
         inflater = LayoutInflater.from(context); // przypisuje widokom ,xml
     }
@@ -27,21 +26,17 @@ public class ZakupyAdapter extends RecyclerView.Adapter<ZakupyAdapter.ProduktVie
     @Override
     public ProduktViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // tworzy widoki uruchamiania aktywności
-        // na początku, tworzymy je TYLKO raz
 
-        // definiujemy widok
-        View itemView = inflater.inflate(R.layout.item_view, parent, false); // false - nie będzie dążyło za root / który widok mamy użyć
-        // ADAPTER to taki mostek między danymi(np. lista) i widokami (.xml)
+        View itemView = inflater.inflate(R.layout.item_view, parent, false);
         return new ProduktViewHolder(itemView, this);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProduktViewHolder holder, int position) { // holder z klasy ProduktViewHolder, pozycja którą mamy wyświetlać
+    public void onBindViewHolder(@NonNull ProduktViewHolder holder, int position) {
         // do widoków przypisujemy dane do wyświetlenia
         // na bieżąco
-        // łączymy widok z danymi
 
-        holder.itemTextView.setText(produkty.get(position)); // element z pozycji position ma być wyświetony
+        holder.itemTextView.setText(produkty.get(position));
     }
 
     @Override
@@ -50,15 +45,14 @@ public class ZakupyAdapter extends RecyclerView.Adapter<ZakupyAdapter.ProduktVie
         return produkty.size();
     }
 
-    public class ProduktViewHolder extends RecyclerView.ViewHolder { // żąrówka: create constructor matching super
-        // viewHolder jest odpowiedzialny za to jakie dany musimy wykorzystać
+    public class ProduktViewHolder extends RecyclerView.ViewHolder {
         public TextView itemTextView;
         public ZakupyAdapter zakupyAdapter;
 
-        public ProduktViewHolder(@NonNull View itemView, ZakupyAdapter adapter) { // *
+        public ProduktViewHolder(@NonNull View itemView, ZakupyAdapter adapter) {
             super(itemView);
             itemTextView = itemView.findViewById(R.id.textView);
-            this.zakupyAdapter = adapter; // zakupyAdapter będzie tym adapterem *
+            this.zakupyAdapter = adapter;
 
         }
     }
